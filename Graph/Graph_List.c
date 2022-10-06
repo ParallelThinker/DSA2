@@ -1,6 +1,6 @@
 
 
-#include <stdio.h>
+
 // Usr Libraries
 #include "Graph_List.h"
 
@@ -31,6 +31,7 @@ void GL_insert(Graph G, int v, int w){
     if(p_aux->rotulo == w) // ja existente no grafo !
       return ;
   p_aux = malloc(sizeof(Node));//Aloca um novo no, que seria a relacao entre v-w
+  //preenche seus valores
   p_aux->rotulo = w;
   p_aux->next = G->A[v];
   G->A[v] = p_aux;
@@ -38,21 +39,55 @@ void GL_insert(Graph G, int v, int w){
 }
 
 //Graph insertion -> unsafe way
+//Inserts a new arch without checking
 void GL_insert_unsafe(Graph G, int v, int w){
-  
+  Node *p_aux;
+  p_aux = malloc(sizeof(Node));
+
+  p_aux->rotulo = w;   
+  p_aux->next = G->A[v];
+
+  G->A[v] = p_aux;
+  G->m +=1; 
 }
 
 //show Graph instance
 void GL_display(Graph G){
-  
+
 }
 
 //print Graph
-void GL_print(Graph G){
-  
+void GL_print_file(Graph G, FILE *output){
+  int i;
+  Node *p; 
+  fprintf(output, "%d %d\n", G->n, G->m); //vertice + aresta
+  for(int i = 0; i < G->n;i++){
+    for(p=G->A[i]; p != NULL; p = p->next)
+      fprintf(output, "%2d", p->rotulo); //imprime arcos do vertice
+    fprintf(output, "-1"); //indica final da linha no Grafo (sentinela)
+    fprintf(output, "\n");
+
+  }
+
 }
 
 //Delete GL instances
 Graph GL_del(Graph G){
+  Node *p; 
+  int i;
+  for(i=0; i <G->n; i++){
+    p = G->A[i]; 
+    while(p!=NULL){
+      G->A[i] = p; 
+      p = p->next;
+      free(G->A[i]);
+    }
+    G->A[i] = NULL;
+
+  }
+  free(G->A);
+  G->A = NULL;
   
+  free(G);
+  return NULL;
 }

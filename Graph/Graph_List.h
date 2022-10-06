@@ -1,6 +1,9 @@
 #ifndef GRAPH_LIST_H
 #define GRAPH_LIST_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "Graph_defines.h"
 
 typedef struct node Node;
@@ -31,7 +34,7 @@ void GL_insert_unsafe(Graph G, int v, int w);
 void GL_display(Graph G);
 
 //print Graph
-void GL_print(Graph G);
+void GL_print(Graph G, FILE *out);
 
 //Delete GL instances
 Graph GL_del(Graph G);
