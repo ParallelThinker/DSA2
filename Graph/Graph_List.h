@@ -11,14 +11,14 @@ typedef struct graph *Graph;
 
 struct node{
   int rotulo;
-  node *next;//Pointer para Proximo
+  Node *next;//Pointer para Proximo
 };
 
 
 struct graph{
   int m; // total de Vertices
   int n; // Total de arestas
-  node* *A;//Pointer para vetor de nodes 
+  Node **A;//Pointer para vetor de nodes 
 };
 
 //Instantiate Graph: n equals to total vertices

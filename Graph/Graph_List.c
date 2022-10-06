@@ -63,7 +63,7 @@ void GL_print_file(Graph G, FILE *output){
   fprintf(output, "%d %d\n", G->n, G->m); //vertice + aresta
   for(int i = 0; i < G->n;i++){
     for(p=G->A[i]; p != NULL; p = p->next)
-      fprintf(output, "%2d", p->rotulo); //imprime arcos do vertice
+      fprintf(output, "%2d ", p->rotulo); //imprime arcos do vertice
     fprintf(output, "-1"); //indica final da linha no Grafo (sentinela)
     fprintf(output, "\n");
 
